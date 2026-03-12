@@ -56,12 +56,12 @@
     for (let i = 0; i < 14; i++) {
       const b = document.createElement('div');
       b.className = 'bubble';
-      const size = 18 + Math.random() * 72;
+      const size = (18 + Math.random() * 72) * 100;
       b.style.width = size + 'px';
       b.style.height = size + 'px';
       b.style.left = (Math.random() * 100) + '%';
-      b.style.animationDuration = (10 + Math.random() * 16) + 's';
-      b.style.animationDelay = (-Math.random() * 26) + 's';
+      b.style.animationDuration = (100 + Math.random() * 160) + 's';
+      b.style.animationDelay = (-Math.random() * 260) + 's';
       b.style.opacity = (0.04 + Math.random() * 0.13);
       container.appendChild(b);
     }
