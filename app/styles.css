@@ -22,12 +22,11 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-family: 'Nunito', 'Segoe UI', sans-serif;
-  background-color: #fff;
+  background-color: #e6efec;
   background-image:
-    linear-gradient(45deg, #efefef 25%, rgba(239,239,239,0) 25%, rgba(239,239,239,0) 75%, #efefef 75%, #efefef),
-    linear-gradient(45deg, #efefef 25%, rgba(239,239,239,0) 25%, rgba(239,239,239,0) 75%, #efefef 75%, #efefef);
-  background-position: 0 0, 10px 10px;
-  background-size: 21px 21px;
+    radial-gradient(ellipse at top left,    #d6e0d8 0%, transparent 55%),
+    radial-gradient(ellipse at bottom left, #e8f3e5 0%, transparent 55%),
+    radial-gradient(ellipse at bottom right, #ffffff 0%, transparent 55%);
   user-select: none;
   -webkit-user-select: none;
 }
@@ -110,11 +109,15 @@ html, body {
 .tile {
   width: var(--tile-size);
   height: var(--tile-size);
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.38);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: var(--tile-radius);
+  border: 1px solid rgba(255, 255, 255, 0.72);
   box-shadow:
-    0 4px 14px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -169,7 +172,7 @@ html, body {
 
 /* ─── Settings Tile ─── */
 .tile.settings-tile {
-  background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+  background: rgba(255, 255, 255, 0.38);
   display: flex;
   align-items: center;
   justify-content: center;
