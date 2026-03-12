@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Tom & Jerry",
+    "folder": "/media/cartoons/tom-and-jerry",
+    "poster": "../assets/posters/tom-and-jerry.jpg"
+  },
+  {
+    "name": "Looney Tunes",
+    "folder": "/media/cartoons/looney-tunes",
+    "poster": "../assets/posters/looney-tunes.jpg"
+  },
+  {
+    "name": "Scooby-Doo",
+    "folder": "/media/cartoons/scooby-doo",
+    "poster": "../assets/posters/scooby-doo.jpg"
+  },
+  {
+    "name": "Popeye",
+    "folder": "/media/cartoons/popeye",
+    "poster": "../assets/posters/popeye.jpg"
+  },
+  {
+    "name": "The Flintstones",
+    "folder": "/media/cartoons/flintstones",
+    "poster": "../assets/posters/flintstones.jpg"
+  },
+  {
+    "name": "Pink Panther",
+    "folder": "/media/cartoons/pink-panther",
+    "poster": "../assets/posters/pink-panther.jpg"
+  }
+]

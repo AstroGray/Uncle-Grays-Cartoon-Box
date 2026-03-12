@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.log
+
+# Media files — too large for git, keep locally
+media/cartoons/**/*.mp4
+media/cartoons/**/*.mkv
+media/cartoons/**/*.avi
+media/cartoons/**/*.webm
+media/cartoons/**/*.mov
+media/cartoons/**/*.m4v

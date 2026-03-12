@@ -1,0 +1,15 @@
+{
+  "name": "uncle-grays-cartoon-box",
+  "version": "1.0.0",
+  "description": "A dedicated cartoon watching device with a Wii U Cafe OS-style interface",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "kiosk": "electron . --kiosk"
+  },
+  "dependencies": {
+    "electron": "^28.0.0"
+  },
+  "author": "Uncle Gray",
+  "license": "MIT"
+}
