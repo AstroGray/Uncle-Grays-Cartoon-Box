@@ -1,32 +1,22 @@
 [
   {
-    "name": "Tom & Jerry",
-    "folder": "/media/cartoons/tom-and-jerry",
-    "poster": "../assets/posters/tom-and-jerry.jpg"
-  },
-  {
-    "name": "Looney Tunes",
-    "folder": "/media/cartoons/looney-tunes",
-    "poster": "../assets/posters/looney-tunes.jpg"
-  },
-  {
-    "name": "Scooby-Doo",
-    "folder": "/media/cartoons/scooby-doo",
-    "poster": "../assets/posters/scooby-doo.jpg"
-  },
-  {
-    "name": "Popeye",
-    "folder": "/media/cartoons/popeye",
-    "poster": "../assets/posters/popeye.jpg"
-  },
-  {
-    "name": "The Flintstones",
-    "folder": "/media/cartoons/flintstones",
-    "poster": "../assets/posters/flintstones.jpg"
-  },
-  {
     "name": "Spongebob Squarepants",
     "folder": "media/cartoons/spongebob-squarepants",
     "poster": "../assets/posters/spongebob-squarepants.jpg"
+  },
+  {
+    "name": "Adventure Time",
+    "folder": "/media/cartoons/adventure-time",
+    "poster": "../assets/posters/adventure-time.jpg"
+  },
+  {
+    "name": "Courage The Cowardly Dog",
+    "folder": "/media/cartoons/courage-the-cowardly-dog",
+    "poster": "../assets/posters/courage-the-cowardly-dog.jpg"
+  },
+  {
+    "name": "Teen Titans",
+    "folder": "/media/cartoons/teen-titans",
+    "poster": "../assets/posters/teen-titans.jpg"
   }
 ]
