@@ -62,7 +62,9 @@ ipcMain.handle('load-cartoons', async () => {
 // ──────────────────────────────────────────────
 ipcMain.handle('list-episodes', async (_event, folderPath) => {
   try {
-    const resolved = path.resolve(folderPath);
+    const resolved = path.isAbsolute(folderPath)
+      ? folderPath
+      : path.join(__dirname, '..', folderPath);
     const files = fs.readdirSync(resolved);
     const videoExts = ['.mp4', '.mkv', '.avi', '.webm', '.mov', '.m4v'];
     return files
