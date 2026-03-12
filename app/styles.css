@@ -2,7 +2,7 @@
    Uncle Gray's Cartoon Box — Wii U Cafe OS Theme
    ═══════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap');
 
 * {
   margin: 0;
@@ -21,7 +21,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  font-family: 'M PLUS Rounded 1c', 'Nunito', 'Segoe UI', sans-serif;
   background-color: #e6efec;
   background-image:
     radial-gradient(ellipse at top left,    #d6e0d8 0%, transparent 55%),
