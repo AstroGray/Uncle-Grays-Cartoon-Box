@@ -94,10 +94,10 @@ body::before {
   position: fixed;
   top: 54px;
   left: 20px;
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   z-index: 20;
-  border-radius: 14px;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -115,7 +115,7 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 15px;
   display: block;
 }
 
@@ -125,13 +125,13 @@ body::before {
   height: 100%;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 15px;
   background: rgba(200, 220, 225, 0.4);
 }
 
 #profile-placeholder svg {
-  width: 52px;
-  height: 52px;
+  width: 78px;
+  height: 78px;
 }
 
 /* ─── Tile Grid ─── */
@@ -200,7 +200,7 @@ body::before {
 /* ─── Tile Square ─── */
 .tile {
   width: 100%;
-  height: calc(var(--tile-size) - 12px);
+  height: calc((var(--tile-size) - 12px) * 1.25);
   flex-shrink: 0;
   background: rgba(255, 255, 255, 0.38);
   backdrop-filter: blur(28px);
