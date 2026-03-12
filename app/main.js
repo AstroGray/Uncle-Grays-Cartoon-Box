@@ -48,9 +48,37 @@ app.on('window-all-closed', () => {
 // ──────────────────────────────────────────────
 ipcMain.handle('load-cartoons', async () => {
   const configPath = path.join(__dirname, '..', 'config', 'cartoons.json');
+  const postersDir = path.join(__dirname, '..', 'assets', 'posters');
+  const imageExts = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+
   try {
     const raw = fs.readFileSync(configPath, 'utf-8');
-    return JSON.parse(raw);
+    const cartoons = JSON.parse(raw);
+
+    // Scan the posters folder once (mirrors how list-episodes scans video folders)
+    let posterFiles = [];
+    try { posterFiles = fs.readdirSync(postersDir); } catch (_) {}
+
+    return cartoons.map(cartoon => {
+      // Derive slug from the cartoon's folder name (e.g. "spongebob-squarepants")
+      const slug = path.basename(cartoon.folder);
+
+      // Look for <slug>.<ext> in the posters directory — auto-discovery
+      const match = posterFiles.find(f =>
+        path.basename(f, path.extname(f)) === slug &&
+        imageExts.includes(path.extname(f).toLowerCase())
+      );
+
+      if (match) {
+        // Absolute path so Electron's file:// protocol can load it
+        cartoon.poster = path.join(postersDir, match);
+      } else if (cartoon.poster) {
+        // Fall back to the config value, resolved to absolute
+        cartoon.poster = path.resolve(path.dirname(configPath), cartoon.poster);
+      }
+
+      return cartoon;
+    });
   } catch (err) {
     console.error('Failed to load cartoons.json:', err.message);
     return [];
