@@ -53,9 +53,17 @@
   function createBubbles() {
     const container = document.getElementById('bubbles');
     if (!container) return;
+    const bubbleColors = [
+      'rgba(214, 224, 216, 0.8)',
+      'rgba(230, 239, 236, 0.8)',
+      'rgba(255, 255, 255, 0.8)',
+      'rgba(232, 243, 229, 0.8)',
+    ];
     for (let i = 0; i < 14; i++) {
       const b = document.createElement('div');
       b.className = 'bubble';
+      const color = bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
+      b.style.background = `radial-gradient(circle at 35% 35%, ${color}, rgba(255,255,255,0.05))`;
       const size = (18 + Math.random() * 72) * 10;
       b.style.width = size + 'px';
       b.style.height = size + 'px';
