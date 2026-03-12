@@ -56,7 +56,7 @@
     for (let i = 0; i < 14; i++) {
       const b = document.createElement('div');
       b.className = 'bubble';
-      const size = (18 + Math.random() * 72) * 100;
+      const size = (18 + Math.random() * 72) * 10;
       b.style.width = size + 'px';
       b.style.height = size + 'px';
       b.style.left = (-20 + Math.random() * 120) + '%';
