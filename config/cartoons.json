@@ -26,7 +26,7 @@
   },
   {
     "name": "Spongebob Squarepants",
-    "folder": "/media/cartoons/spongebob-squarepants",
+    "folder": "media/cartoons/spongebob-squarepants",
     "poster": "../assets/posters/spongebob-squarepants.jpg"
   }
 ]
