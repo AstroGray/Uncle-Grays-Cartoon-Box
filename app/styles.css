@@ -120,7 +120,6 @@ body::before {
 /* ─── Tile Glass Frame (the see-through border ring) ─── */
 .tile-frame {
   width: var(--tile-size);
-  height: var(--tile-size);
   padding: 6px;
   box-sizing: border-box;
   border-radius: calc(var(--tile-radius) + 5px);
@@ -132,6 +131,8 @@ body::before {
     0 4px 20px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     inset 0 -1px 0 rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -154,7 +155,8 @@ body::before {
 /* ─── Tile Square ─── */
 .tile {
   width: 100%;
-  height: 100%;
+  height: calc(var(--tile-size) - 12px);
+  flex-shrink: 0;
   background: rgba(255, 255, 255, 0.38);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
@@ -163,31 +165,25 @@ body::before {
   overflow: hidden;
 }
 
-/* ─── Tile "Play" Hover Overlay ─── */
-.tile::after {
-  content: 'Play';
-  position: absolute;
-  inset: 0;
-  background: rgba(57, 186, 209, 0.5);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+/* ─── Tile "Play" Bar (expands below image on hover) ─── */
+.tile-play-bar {
+  flex-shrink: 0;
+  overflow: hidden;
+  max-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 28px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 8px rgba(0, 60, 80, 0.4);
-  border-radius: var(--tile-radius);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 2;
+  letter-spacing: 1.5px;
+  text-shadow: 0 1px 4px rgba(0, 40, 60, 0.5);
+  transition: max-height 0.2s ease;
 }
 
-.tile-wrapper:hover .tile::after,
-.tile-wrapper.focused .tile::after {
-  opacity: 1;
+.tile-wrapper:hover .tile-play-bar,
+.tile-wrapper.focused .tile-play-bar {
+  max-height: calc(var(--tile-size) / 8);
 }
 
 /* ─── Tile Poster ─── */

@@ -111,9 +111,14 @@
       label.className = 'tile-label';
       label.textContent = cartoon.name;
 
+      const playBar = document.createElement('div');
+      playBar.className = 'tile-play-bar';
+      playBar.textContent = 'Play';
+
       const frame = document.createElement('div');
       frame.className = 'tile-frame';
       frame.appendChild(tile);
+      frame.appendChild(playBar);
       wrapper.appendChild(frame);
       wrapper.appendChild(label);
       wrapper.addEventListener('click', () => onTileSelect(index));
@@ -135,9 +140,14 @@
     settingsLabel.className = 'tile-label';
     settingsLabel.textContent = 'Settings';
 
+    const settingsPlayBar = document.createElement('div');
+    settingsPlayBar.className = 'tile-play-bar';
+    settingsPlayBar.textContent = 'Open';
+
     const settingsFrame = document.createElement('div');
     settingsFrame.className = 'tile-frame';
     settingsFrame.appendChild(settingsTile);
+    settingsFrame.appendChild(settingsPlayBar);
     settingsWrapper.appendChild(settingsFrame);
     settingsWrapper.appendChild(settingsLabel);
     settingsWrapper.addEventListener('click', () => openSettings());
