@@ -111,7 +111,10 @@
       label.className = 'tile-label';
       label.textContent = cartoon.name;
 
-      wrapper.appendChild(tile);
+      const frame = document.createElement('div');
+      frame.className = 'tile-frame';
+      frame.appendChild(tile);
+      wrapper.appendChild(frame);
       wrapper.appendChild(label);
       wrapper.addEventListener('click', () => onTileSelect(index));
       grid.appendChild(wrapper);
@@ -132,7 +135,10 @@
     settingsLabel.className = 'tile-label';
     settingsLabel.textContent = 'Settings';
 
-    settingsWrapper.appendChild(settingsTile);
+    const settingsFrame = document.createElement('div');
+    settingsFrame.className = 'tile-frame';
+    settingsFrame.appendChild(settingsTile);
+    settingsWrapper.appendChild(settingsFrame);
     settingsWrapper.appendChild(settingsLabel);
     settingsWrapper.addEventListener('click', () => openSettings());
     grid.appendChild(settingsWrapper);
