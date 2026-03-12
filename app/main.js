@@ -10,7 +10,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     fullscreen: true,
     frame: false,
-    backgroundColor: '#2d8bc9',
+    backgroundColor: '#e6efec',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
