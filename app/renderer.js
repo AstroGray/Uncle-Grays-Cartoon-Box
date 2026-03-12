@@ -59,7 +59,8 @@
       const size = (18 + Math.random() * 72) * 100;
       b.style.width = size + 'px';
       b.style.height = size + 'px';
-      b.style.left = (Math.random() * 100) + '%';
+      b.style.left = (-20 + Math.random() * 120) + '%';
+      b.style.top  = (-20 + Math.random() * 120) + '%';
       b.style.animationDuration = (100 + Math.random() * 160) + 's';
       b.style.animationDelay = (-Math.random() * 260) + 's';
       b.style.opacity = (0.04 + Math.random() * 0.13);

@@ -31,6 +31,17 @@ html, body {
   -webkit-user-select: none;
 }
 
+/* Soft blur layer over the raw background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+}
+
 /* ─── Bubble Background ─── */
 #bubbles {
   position: fixed;
@@ -49,10 +60,10 @@ html, body {
 }
 
 @keyframes bubble-rise {
-  0%   { transform: translateY(110vh) translateX(0px);   opacity: 0; }
-  5%   { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { transform: translateY(-140px) translateX(28px); opacity: 0; }
+  0%   { transform: translate(0px,    0px);    opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { transform: translate(24px, -22vh);   opacity: 0; }
 }
 
 /* ─── Status Bar ─── */
@@ -110,14 +121,16 @@ html, body {
   width: var(--tile-size);
   height: var(--tile-size);
   background: rgba(255, 255, 255, 0.38);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
   border-radius: var(--tile-radius);
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  border: 3px solid rgba(255, 255, 255, 0.82);
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+    0 4px 20px rgba(0, 0, 0, 0.12),
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.06),
+    inset 2px 0 0 rgba(255, 255, 255, 0.6),
+    inset -2px 0 0 rgba(255, 255, 255, 0.6);
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
