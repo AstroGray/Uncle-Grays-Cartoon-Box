@@ -25,8 +25,8 @@
     "poster": "../assets/posters/flintstones.jpg"
   },
   {
-    "name": "Pink Panther",
-    "folder": "/media/cartoons/pink-panther",
-    "poster": "../assets/posters/pink-panther.jpg"
+    "name": "Spongebob Squarepants",
+    "folder": "/media/cartoons/spongebob-squarepants",
+    "poster": "../assets/posters/spongebob-squarepants.jpg"
   }
 ]
