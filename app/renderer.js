@@ -17,7 +17,16 @@
   let focusIndex = 0;
   let tiles = [];
   let isPlaying = false;
-  let columns = 1;
+  let columns = 4;
+
+  const noPosterColors = [
+    'linear-gradient(135deg, #ff6b6b, #ee5a24)',
+    'linear-gradient(135deg, #ffa502, #f0932b)',
+    'linear-gradient(135deg, #7bed9f, #26de81)',
+    'linear-gradient(135deg, #70a1ff, #3867d6)',
+    'linear-gradient(135deg, #a29bfe, #6c5ce7)',
+    'linear-gradient(135deg, #fd79a8, #e84393)',
+  ];
 
   // ─── Clock ───
   function updateClock() {
@@ -31,25 +40,46 @@
 
   function updateGreeting() {
     const hour = new Date().getHours();
-    if (hour < 12) greetingEl.textContent = "Good Morning!";
-    else if (hour < 17) greetingEl.textContent = "Good Afternoon!";
-    else greetingEl.textContent = "Good Evening!";
+    if (hour < 12) greetingEl.textContent = 'Good Morning!';
+    else if (hour < 17) greetingEl.textContent = 'Good Afternoon!';
+    else greetingEl.textContent = 'Good Evening!';
   }
 
   updateClock();
   updateGreeting();
   setInterval(updateClock, 10000);
 
+  // ─── Bubble Background ───
+  function createBubbles() {
+    const container = document.getElementById('bubbles');
+    if (!container) return;
+    for (let i = 0; i < 14; i++) {
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      const size = 18 + Math.random() * 72;
+      b.style.width = size + 'px';
+      b.style.height = size + 'px';
+      b.style.left = (Math.random() * 100) + '%';
+      b.style.animationDuration = (10 + Math.random() * 16) + 's';
+      b.style.animationDelay = (-Math.random() * 26) + 's';
+      b.style.opacity = (0.04 + Math.random() * 0.13);
+      container.appendChild(b);
+    }
+  }
+
   // ─── Build Tile Grid ───
   async function init() {
     cartoons = await window.cartoonBox.loadCartoons();
 
     cartoons.forEach((cartoon, index) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'tile-wrapper';
+      wrapper.dataset.index = index;
+      wrapper.setAttribute('role', 'button');
+      wrapper.setAttribute('aria-label', cartoon.name);
+
       const tile = document.createElement('div');
       tile.className = 'tile';
-      tile.dataset.index = index;
-      tile.setAttribute('role', 'button');
-      tile.setAttribute('aria-label', cartoon.name);
 
       if (cartoon.poster) {
         const img = document.createElement('img');
@@ -60,32 +90,45 @@
         img.onerror = function () {
           this.remove();
           tile.classList.add('no-poster');
+          tile.style.background = noPosterColors[index % noPosterColors.length];
         };
         tile.appendChild(img);
       } else {
         tile.classList.add('no-poster');
+        tile.style.background = noPosterColors[index % noPosterColors.length];
       }
 
       const label = document.createElement('div');
       label.className = 'tile-label';
       label.textContent = cartoon.name;
-      tile.appendChild(label);
 
-      tile.addEventListener('click', () => onTileSelect(index));
-      grid.appendChild(tile);
+      wrapper.appendChild(tile);
+      wrapper.appendChild(label);
+      wrapper.addEventListener('click', () => onTileSelect(index));
+      grid.appendChild(wrapper);
     });
 
-    // Add a settings tile at the end
+    // Settings tile
+    const settingsWrapper = document.createElement('div');
+    settingsWrapper.className = 'tile-wrapper';
+    settingsWrapper.dataset.index = cartoons.length;
+    settingsWrapper.setAttribute('role', 'button');
+    settingsWrapper.setAttribute('aria-label', 'Settings');
+
     const settingsTile = document.createElement('div');
     settingsTile.className = 'tile settings-tile';
-    settingsTile.dataset.index = cartoons.length;
-    settingsTile.setAttribute('role', 'button');
-    settingsTile.setAttribute('aria-label', 'Settings');
-    settingsTile.innerHTML = '<div class="tile-icon">&#9881;</div><div class="tile-label">Settings</div>';
-    settingsTile.addEventListener('click', () => openSettings());
-    grid.appendChild(settingsTile);
+    settingsTile.innerHTML = '<div class="tile-icon">&#9881;</div>';
 
-    tiles = Array.from(grid.querySelectorAll('.tile'));
+    const settingsLabel = document.createElement('div');
+    settingsLabel.className = 'tile-label';
+    settingsLabel.textContent = 'Settings';
+
+    settingsWrapper.appendChild(settingsTile);
+    settingsWrapper.appendChild(settingsLabel);
+    settingsWrapper.addEventListener('click', () => openSettings());
+    grid.appendChild(settingsWrapper);
+
+    tiles = Array.from(grid.querySelectorAll('.tile-wrapper'));
     updateColumns();
     setFocus(0);
   }
@@ -108,7 +151,6 @@
         return;
       }
 
-      // Pick a random episode
       const randomEp = episodes[Math.floor(Math.random() * episodes.length)];
       loadingOverlay.classList.add('hidden');
 
@@ -176,7 +218,6 @@
         break;
       case 'Escape':
       case 'Backspace':
-        // Could be used to return from a sub-menu later
         break;
     }
   });
@@ -184,7 +225,7 @@
   // ─── Gamepad Support (TV remotes, controllers) ───
   let gamepadPollInterval = null;
   let lastGamepadInput = 0;
-  const GAMEPAD_DEBOUNCE = 200; // ms
+  const GAMEPAD_DEBOUNCE = 200;
 
   function pollGamepad() {
     const gamepads = navigator.getGamepads();
@@ -194,7 +235,6 @@
       if (!gp) continue;
       if (now - lastGamepadInput < GAMEPAD_DEBOUNCE) continue;
 
-      // D-pad or left stick
       const axisX = gp.axes[0] || 0;
       const axisY = gp.axes[1] || 0;
       const threshold = 0.5;
@@ -213,13 +253,11 @@
         lastGamepadInput = now;
       }
 
-      // A button (button 0) = select
       if (gp.buttons[0]?.pressed) {
         tiles[focusIndex].click();
         lastGamepadInput = now;
       }
 
-      // B button (button 1) = back
       if (gp.buttons[1]?.pressed) {
         if (!settingsOverlay.classList.contains('hidden')) {
           settingsOverlay.classList.add('hidden');
@@ -245,5 +283,6 @@
   });
 
   // ─── Boot ───
+  createBubbles();
   init();
 })();
