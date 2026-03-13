@@ -36,10 +36,9 @@ app.whenReady().then(() => {
   createWindow();
 
   // Quit shortcut (Ctrl+Q) — useful during development
-  // destroy() bypasses fullscreen state, avoiding the setSimpleFullScreen race
+  // app.exit() terminates immediately, bypassing any blocked quit event chain
   globalShortcut.register('CommandOrControl+Q', () => {
-    if (mainWindow) mainWindow.destroy();
-    else app.quit();
+    app.exit(0);
   });
 });
 
