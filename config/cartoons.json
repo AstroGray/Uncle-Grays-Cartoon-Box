@@ -6,17 +6,17 @@
   },
   {
     "name": "Adventure Time",
-    "folder": "/media/cartoons/adventure-time",
+    "folder": "media/cartoons/adventure-time",
     "poster": "../assets/posters/adventure-time.jpg"
   },
   {
     "name": "Courage The Cowardly Dog",
-    "folder": "/media/cartoons/courage-the-cowardly-dog",
+    "folder": "media/cartoons/courage-the-cowardly-dog",
     "poster": "../assets/posters/courage-the-cowardly-dog.jpg"
   },
   {
     "name": "Teen Titans",
-    "folder": "/media/cartoons/teen-titans",
+    "folder": "media/cartoons/teen-titans",
     "poster": "../assets/posters/teen-titans.jpg"
   }
 ]
