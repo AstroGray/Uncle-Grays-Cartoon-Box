@@ -117,11 +117,12 @@ ipcMain.handle('play-video', async (_event, filePath) => {
     const inputConf = path.join(os.tmpdir(), 'cartoonbox-input.conf');
     try { fs.writeFileSync(inputConf, 'q quit 1\nESC quit 1\n'); } catch (_) {}
 
-    // Hide the Electron window while mpv plays
-    if (mainWindow) mainWindow.hide();
-
+    // --no-native-fs: prevents mpv from creating a new macOS fullscreen Space
+    // (which would cause a desktop flash on enter/exit). mpv instead uses a
+    // borderless window that stays in the same space as Electron.
     const mpv = spawn('mpv', [
       '--fullscreen',
+      '--no-native-fs',
       '--no-terminal',
       '--really-quiet',
       '--input-default-bindings',
@@ -131,20 +132,14 @@ ipcMain.handle('play-video', async (_event, filePath) => {
     ], { stdio: 'ignore' });
 
     mpv.on('close', (code) => {
-      if (mainWindow) {
-        mainWindow.show();
-        mainWindow.focus();
-      }
+      if (mainWindow) mainWindow.focus();
       // code 0 = natural end of file, code 1 = user pressed q / ESC
       resolve({ naturalEnd: code === 0 });
     });
 
     mpv.on('error', (err) => {
       console.error('mpv error:', err.message);
-      if (mainWindow) {
-        mainWindow.show();
-        mainWindow.focus();
-      }
+      if (mainWindow) mainWindow.focus();
       resolve({ naturalEnd: false });
     });
   });

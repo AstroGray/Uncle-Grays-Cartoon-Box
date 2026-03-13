@@ -338,6 +338,14 @@ body::before {
   color: #636e72;
 }
 
+/* ─── Video Playback Overlay ─── */
+#video-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+}
+
 /* ─── Loading Overlay ─── */
 #loading-overlay {
   position: fixed;

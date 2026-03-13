@@ -8,6 +8,7 @@
 
   const grid = document.getElementById('tile-grid');
   const loadingOverlay = document.getElementById('loading-overlay');
+  const videoOverlay = document.getElementById('video-overlay');
   const settingsOverlay = document.getElementById('settings-overlay');
   const settingsClose = document.getElementById('settings-close');
   const greetingEl = document.getElementById('greeting');
@@ -178,6 +179,10 @@
 
       loadingOverlay.classList.add('hidden');
 
+      // Cover the UI with a solid black overlay — mpv will appear on top.
+      // This keeps the Electron window always visible (no desktop flash).
+      videoOverlay.classList.remove('hidden');
+
       // Keep playing random episodes until the user presses Escape / q
       let keepPlaying = true;
       while (keepPlaying) {
@@ -187,13 +192,9 @@
         // result.naturalEnd = true  → episode finished on its own → play another
         // result.naturalEnd = false → user quit (Escape/q) → return to home
         keepPlaying = result && result.naturalEnd;
-        if (keepPlaying) {
-          // Brief loading overlay between episodes
-          loadingOverlay.classList.remove('hidden');
-          await new Promise(r => setTimeout(r, 300));
-          loadingOverlay.classList.add('hidden');
-        }
       }
+
+      videoOverlay.classList.add('hidden');
     } catch (err) {
       console.error('Playback error:', err);
       alert('Failed to play episode. Is mpv installed?');
