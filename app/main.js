@@ -36,15 +36,11 @@ app.whenReady().then(() => {
   createWindow();
 
   // Quit shortcut (Ctrl+Q) — useful during development
-  // Exit simpleFullscreen first; skipping this can cause app.quit() to stall
+  // destroy() bypasses fullscreen state, avoiding the setSimpleFullScreen race
   globalShortcut.register('CommandOrControl+Q', () => {
-    if (mainWindow) mainWindow.setSimpleFullScreen(false);
-    app.quit();
+    if (mainWindow) mainWindow.destroy();
+    else app.quit();
   });
-});
-
-app.on('before-quit', () => {
-  if (mainWindow) mainWindow.setSimpleFullScreen(false);
 });
 
 app.on('window-all-closed', () => {
