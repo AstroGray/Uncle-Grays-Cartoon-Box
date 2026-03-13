@@ -10,6 +10,7 @@ let isKiosk = process.argv.includes('--kiosk');
 function createWindow() {
   mainWindow = new BrowserWindow({
     fullscreen: true,
+    simpleFullscreen: true,  // macOS: no new Space, so mpv can appear on top
     frame: false,
     backgroundColor: '#e6efec',
     webPreferences: {
