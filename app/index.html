@@ -21,14 +21,17 @@
   </header>
 
   <!-- Profile tile (top-left, Wii U style) -->
-  <div id="profile-tile">
-    <img id="profile-photo" src="../assets/profile.jpg" alt="Profile" draggable="false" onerror="this.style.display='none';document.getElementById('profile-placeholder').style.display='flex'">
-    <div id="profile-placeholder">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="8" r="4" fill="rgba(100,130,140,0.7)"/>
-        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(100,130,140,0.7)" stroke-width="2" stroke-linecap="round" fill="none"/>
-      </svg>
+  <div id="profile-container">
+    <div id="profile-tile">
+      <img id="profile-photo" src="../assets/profile.jpg" alt="Profile" draggable="false" onerror="this.style.display='none';document.getElementById('profile-placeholder').style.display='flex'">
+      <div id="profile-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="4" fill="rgba(100,130,140,0.7)"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(100,130,140,0.7)" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
     </div>
+    <div id="profile-speech-bubble">it's me, uncle Gray!</div>
   </div>
 
   <!-- Main tile grid -->
