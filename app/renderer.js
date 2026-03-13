@@ -158,7 +158,7 @@
     setFocus(0);
   }
 
-  // ─── Tile Selection — Pick Random Episode ───
+  // ─── Tile Selection — Pick and loop random episodes ───
   async function onTileSelect(index) {
     if (isPlaying || index >= cartoons.length) return;
 
@@ -176,10 +176,24 @@
         return;
       }
 
-      const randomEp = episodes[Math.floor(Math.random() * episodes.length)];
       loadingOverlay.classList.add('hidden');
 
-      await window.cartoonBox.playVideo(randomEp);
+      // Keep playing random episodes until the user presses Escape / q
+      let keepPlaying = true;
+      while (keepPlaying) {
+        const eps = await window.cartoonBox.listEpisodes(cartoon.folder);
+        const randomEp = eps[Math.floor(Math.random() * eps.length)];
+        const result = await window.cartoonBox.playVideo(randomEp);
+        // result.naturalEnd = true  → episode finished on its own → play another
+        // result.naturalEnd = false → user quit (Escape/q) → return to home
+        keepPlaying = result && result.naturalEnd;
+        if (keepPlaying) {
+          // Brief loading overlay between episodes
+          loadingOverlay.classList.remove('hidden');
+          await new Promise(r => setTimeout(r, 300));
+          loadingOverlay.classList.add('hidden');
+        }
+      }
     } catch (err) {
       console.error('Playback error:', err);
       alert('Failed to play episode. Is mpv installed?');

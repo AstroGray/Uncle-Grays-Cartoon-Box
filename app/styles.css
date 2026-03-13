@@ -143,38 +143,55 @@ body::before {
 
 #profile-speech-bubble {
   position: relative;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 14px;
-  padding: 10px 16px;
-  font-size: 15px;
-  font-weight: 700;
-  color: #333;
+  background: #ffffff;
+  border: 3px solid #222;
+  /* Slightly uneven per-corner radii — hand-drawn cloud feel */
+  border-radius: 26px 30px 28px 24px / 28px 24px 30px 26px;
+  padding: 12px 22px 12px 20px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #222;
   white-space: nowrap;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  /* drop-shadow plays nicely with the border outline */
+  filter: drop-shadow(3px 4px 0px rgba(0, 0, 0, 0.13));
   opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateX(-10px) scale(0.88);
+  transition: opacity 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
 }
 
-/* Triangle pointing left toward the profile tile */
+/* Tail — dark outline triangle */
 #profile-speech-bubble::before {
   content: '';
   position: absolute;
-  left: -8px;
+  left: -18px;
   top: 50%;
   transform: translateY(-50%);
-  border: 8px solid transparent;
-  border-right: 8px solid rgba(255, 255, 255, 0.75);
-  border-left: 0;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 18px solid #222;
+}
+
+/* Tail — white fill triangle (sits on top of outline) */
+#profile-speech-bubble::after {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-right: 13px solid #ffffff;
 }
 
 #profile-container:hover #profile-speech-bubble {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) scale(1);
 }
 
 /* ─── Tile Grid ─── */

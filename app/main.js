@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron');
 const path = require('path');
+const os = require('os');
 const { spawn } = require('child_process');
 const fs = require('fs');
 
@@ -106,9 +107,16 @@ ipcMain.handle('list-episodes', async (_event, folderPath) => {
 
 // ──────────────────────────────────────────────
 // IPC: Play a video file with mpv
+// Returns { naturalEnd: true }  when the episode finishes on its own
+// Returns { naturalEnd: false } when the user quits (Escape / q)
 // ──────────────────────────────────────────────
 ipcMain.handle('play-video', async (_event, filePath) => {
   return new Promise((resolve) => {
+    // Write a tiny input-conf that makes q / ESC exit with code 1
+    // so the renderer can tell "user quit" apart from "episode ended"
+    const inputConf = path.join(os.tmpdir(), 'cartoonbox-input.conf');
+    try { fs.writeFileSync(inputConf, 'q quit 1\nESC quit 1\n'); } catch (_) {}
+
     // Hide the Electron window while mpv plays
     if (mainWindow) mainWindow.hide();
 
@@ -118,15 +126,17 @@ ipcMain.handle('play-video', async (_event, filePath) => {
       '--really-quiet',
       '--input-default-bindings',
       '--input-vo-keyboard=yes',
+      `--input-conf=${inputConf}`,
       filePath
     ], { stdio: 'ignore' });
 
-    mpv.on('close', () => {
+    mpv.on('close', (code) => {
       if (mainWindow) {
         mainWindow.show();
         mainWindow.focus();
       }
-      resolve();
+      // code 0 = natural end of file, code 1 = user pressed q / ESC
+      resolve({ naturalEnd: code === 0 });
     });
 
     mpv.on('error', (err) => {
@@ -135,7 +145,7 @@ ipcMain.handle('play-video', async (_event, filePath) => {
         mainWindow.show();
         mainWindow.focus();
       }
-      resolve();
+      resolve({ naturalEnd: false });
     });
   });
 });
