@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Portraits",
+    "slug": "portraits",
+    "description": "People and faces"
+  },
+  {
+    "name": "Landscape",
+    "slug": "landscape",
+    "description": "Nature and environments"
+  },
+  {
+    "name": "Street",
+    "slug": "street",
+    "description": "Urban life and moments"
+  }
+]

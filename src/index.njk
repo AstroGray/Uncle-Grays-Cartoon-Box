@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+title: ""
+---
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">{{ site.title }}</h1>
+    <p class="hero-subtitle">{{ site.description }}</p>
+  </div>
+</section>
+
+<section class="home-grid">
+  {% for cat in categories %}
+  <a href="/{{ cat.slug }}/" class="home-card">
+    <div class="home-card-img" style="background-image: url('/images/{{ cat.slug }}/cover.jpg');">
+      <noscript><img src="/images/{{ cat.slug }}/cover.jpg" alt="{{ cat.name }}"></noscript>
+    </div>
+    <h2 class="home-card-title">{{ cat.name }}</h2>
+  </a>
+  {% endfor %}
+</section>

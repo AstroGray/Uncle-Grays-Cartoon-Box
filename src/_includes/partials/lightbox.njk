@@ -1,0 +1,58 @@
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
+  <img src="" alt="">
+</div>
+
+<script>
+(function() {
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = lightbox.querySelector('img');
+  const items = Array.from(document.querySelectorAll('[data-lightbox]'));
+  let currentIndex = 0;
+
+  function open(index) {
+    currentIndex = index;
+    lbImg.src = items[index].href;
+    lbImg.alt = items[index].querySelector('img').alt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function prev() {
+    open((currentIndex - 1 + items.length) % items.length);
+  }
+
+  function next() {
+    open((currentIndex + 1) % items.length);
+  }
+
+  items.forEach(function(item, i) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      open(i);
+    });
+  });
+
+  lightbox.querySelector('.lightbox-close').addEventListener('click', close);
+  lightbox.querySelector('.lightbox-prev').addEventListener('click', prev);
+  lightbox.querySelector('.lightbox-next').addEventListener('click', next);
+
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) close();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
